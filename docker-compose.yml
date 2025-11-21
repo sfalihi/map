@@ -93,7 +93,7 @@ services:
         else
           echo '== Partition step skipped ==';
         fi &&
-        if [ ! -f /data/merged.osrm.customize ]; then
+        if [ ! -f /data/merged.osrm.cells ]; then
           echo '== Customizing ==';
           osrm-customize /data/merged.osrm;
         else
