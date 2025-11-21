@@ -41,7 +41,6 @@ services:
       replicas: 1
       labels:
         - "traefik.enable=true"
-        - "traefik.docker.network=tourapp_default"
         - "traefik.http.services.server-meydoon.loadbalancer.server.port=8080"
         - "traefik.http.middlewares.server-to-https-meydoon.redirectscheme.scheme=https"
         - "traefik.http.middlewares.server-to-https-meydoon.redirectscheme.permanent=true"
@@ -61,7 +60,6 @@ services:
       replicas: 1
       labels:
         - "traefik.enable=true"
-        - "traefik.docker.network=tourapp_default"
         # define Server-Port
         - "traefik.http.services.tiles-meydoon.loadbalancer.server.port=8080"
         # define Middlewares
@@ -108,7 +106,6 @@ services:
       replicas: 1
       labels:
         - "traefik.enable=true"
-        - "traefik.docker.network=tourapp_default"
         # define Server-Port
         - "traefik.http.services.osrm-meydoon.loadbalancer.server.port=5000"
         # define Middlewares
@@ -138,7 +135,6 @@ services:
       replicas: 1
       labels:
         - "traefik.enable=true"
-        - "traefik.docker.network=tourapp_default"
         # define Server-Port
         - "traefik.http.services.nominatim-meydoon.loadbalancer.server.port=8080"
         # define Middlewares
