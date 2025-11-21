@@ -124,7 +124,7 @@ services:
   nominatim:
     image: mediagis/nominatim:4.2
     volumes:
-      - ./data/osm.pbf/merged.osm.pbf:/data/merged.osm.pbf # Mount local PBF
+      - ./data/osm.pbf:/data # Mount local PBF
       - nominatim-psql:/var/lib/postgresql/14/main
     environment:
       PBF_PATH: /data/merged.osm.pbf
