@@ -1,0 +1,159 @@
+version: "3.8"
+
+services:
+  traefik:
+    image: traefik:latest
+    command:
+      - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedByDefault=false"
+      - "--entryPoints.http.address=:80"
+      - "--entryPoints.https.address=:443"
+      - "--certificatesResolvers.letsencrypt.acme.email=mnik414@gmail.com"
+      - "--certificatesResolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesResolvers.letsencrypt.acme.httpChallenge.entryPoint=http"
+      - "--log.level=INFO"
+      - "--log.filePath=/logs/traefik.log"
+      - "--accessLog.filePath=/logs/access.log"
+      - "--accessLog.bufferingSize=100"
+      - "--providers.swarm=true" # Enable Swarm provider explicitly
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+        mode: host
+      - target: 443
+        published: 443
+        protocol: tcp
+        mode: host
+    deploy:
+      mode: global
+      labels:
+        - "traefik.enable=true"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "letsencrypt:/letsencrypt"
+      - "logs:/logs"
+
+  server:
+    image: meydoon_server:latest
+    deploy:
+      replicas: 1
+      labels:
+        - "traefik.enable=true"
+        - "traefik.docker.network=tourapp_default"
+        - "traefik.http.services.server-meydoon.loadbalancer.server.port=8080"
+        - "traefik.http.middlewares.server-to-https-meydoon.redirectscheme.scheme=https"
+        - "traefik.http.middlewares.server-to-https-meydoon.redirectscheme.permanent=true"
+        - "traefik.http.routers.server-http-meydoon.entrypoints=http"
+        - "traefik.http.routers.server-http-meydoon.rule=Host(`meydoon.org`)"
+        - "traefik.http.routers.server-http-meydoon.middlewares=server-to-https-meydoon"
+        - "traefik.http.routers.server-https-meydoon.entrypoints=https"
+        - "traefik.http.routers.server-https-meydoon.rule=Host(`meydoon.org`)"
+        - "traefik.http.routers.server-https-meydoon.tls=true"
+        - "traefik.http.routers.server-https-meydoon.tls.certresolver=letsencrypt"
+
+  tileserver:
+    image: maptiler/tileserver-gl
+    volumes:
+      - ./data/mbtiles:/data
+    deploy:
+      replicas: 1
+      labels:
+        - "traefik.enable=true"
+        - "traefik.docker.network=tourapp_default"
+        # define Server-Port
+        - "traefik.http.services.tiles-meydoon.loadbalancer.server.port=8080"
+        # define Middlewares
+        - "traefik.http.middlewares.tiles-to-https-meydoon.redirectscheme.scheme=https"
+        - "traefik.http.middlewares.tiles-to-https-meydoon.redirectscheme.permanent=true"
+        # Redirect "host" HTTP traffic to HTTPS
+        - "traefik.http.routers.tiles-http-meydoon.entrypoints=http"
+        - "traefik.http.routers.tiles-http-meydoon.rule=Host(`tiles.meydoon.org`)"
+        - "traefik.http.routers.tiles-http-meydoon.middlewares=tiles-to-https-meydoon"
+        # Handle HTTPS
+        - "traefik.http.routers.tiles-https-meydoon.entrypoints=https"
+        - "traefik.http.routers.tiles-https-meydoon.rule=Host(`tiles.meydoon.org`)"
+        - "traefik.http.routers.tiles-https-meydoon.tls=true"
+        - "traefik.http.routers.tiles-https-meydoon.tls.certresolver=letsencrypt"
+
+  osrm-backend:
+    image: osrm/osrm-backend
+    volumes:
+      - ./data/osm.pbf:/data
+    command: >
+      sh -c "
+        if [ ! -f /data/merged.osrm ]; then
+          echo '== Extracting ==';
+          osrm-extract -p /opt/car.lua /data/merged.osm.pbf;
+        else
+          echo '== Extract step skipped ==';
+        fi &&
+        if [ ! -f /data/merged.osrm.partition ]; then
+          echo '== Partitioning ==';
+          osrm-partition /data/merged.osrm;
+        else
+          echo '== Partition step skipped ==';
+        fi &&
+        if [ ! -f /data/merged.osrm.customize ]; then
+          echo '== Customizing ==';
+          osrm-customize /data/merged.osrm;
+        else
+          echo '== Customize step skipped ==';
+        fi &&
+        echo '== Starting routed server ==' &&
+        osrm-routed --algorithm mld /data/merged.osrm
+      "
+    deploy:
+      replicas: 1
+      labels:
+        - "traefik.enable=true"
+        - "traefik.docker.network=tourapp_default"
+        # define Server-Port
+        - "traefik.http.services.osrm-meydoon.loadbalancer.server.port=5000"
+        # define Middlewares
+        - "traefik.http.middlewares.osrm-to-https-meydoon.redirectscheme.scheme=https"
+        - "traefik.http.middlewares.osrm-to-https-meydoon.redirectscheme.permanent=true"
+        # Redirect "host" HTTP traffic to HTTPS
+        - "traefik.http.routers.osrm-http-meydoon.entrypoints=http"
+        - "traefik.http.routers.osrm-http-meydoon.rule=Host(`osrm.meydoon.org`)"
+        - "traefik.http.routers.osrm-http-meydoon.middlewares=osrm-to-https-meydoon"
+        # Handle HTTPS
+        - "traefik.http.routers.osrm-https-meydoon.entrypoints=https"
+        - "traefik.http.routers.osrm-https-meydoon.rule=Host(`osrm.meydoon.org`)"
+        - "traefik.http.routers.osrm-https-meydoon.tls=true"
+        - "traefik.http.routers.osrm-https-meydoon.tls.certresolver=letsencrypt"
+
+  nominatim:
+    image: mediagis/nominatim:4.2
+    volumes:
+      - ./data/osm.pbf/merged.osm.pbf:/data/merged.osm.pbf # Mount local PBF
+      - nominatim-psql:/var/lib/postgresql/14/main
+    environment:
+      PBF_PATH: /data/merged.osm.pbf
+      # REPLICATION_URL:
+      IMPORT_WIKIPEDIA: "false"
+      NOMINATIM_PASSWORD: secret
+    deploy:
+      replicas: 1
+      labels:
+        - "traefik.enable=true"
+        - "traefik.docker.network=tourapp_default"
+        # define Server-Port
+        - "traefik.http.services.nominatim-meydoon.loadbalancer.server.port=8080"
+        # define Middlewares
+        - "traefik.http.middlewares.nominatim-to-https-meydoon.redirectscheme.scheme=https"
+        - "traefik.http.middlewares.nominatim-to-https-meydoon.redirectscheme.permanent=true"
+        # Redirect "host" HTTP traffic to HTTPS
+        - "traefik.http.routers.nominatim-http-meydoon.entrypoints=http"
+        - "traefik.http.routers.nominatim-http-meydoon.rule=Host(`nominatim.meydoon.org`)"
+        - "traefik.http.routers.nominatim-http-meydoon.middlewares=nominatim-to-https-meydoon"
+        # Handle HTTPS
+        - "traefik.http.routers.nominatim-https-meydoon.entrypoints=https"
+        - "traefik.http.routers.nominatim-https-meydoon.rule=Host(`nominatim.meydoon.org`)"
+        - "traefik.http.routers.nominatim-https-meydoon.tls=true"
+        - "traefik.http.routers.nominatim-https-meydoon.tls.certresolver=letsencrypt"
+
+volumes:
+  letsencrypt:
+  nominatim-psql:

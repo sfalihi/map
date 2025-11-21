@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>سرور نقشه میدون - راهکارهای نقشه حرفه‌ای</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/index.css" />
+    <!-- Font Awesome CDN for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      /* Product Icons */
+      .product-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 120px;
+        margin: 20px 0;
+        color: #2c3e50;
+        transition: transform 0.3s ease;
+      }
+
+      .product-card:hover .product-icon {
+        transform: translateY(-5px);
+      }
+
+      /* Case Study Icons */
+      .case-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 120px;
+        height: 120px;
+        background: #2c3e50;
+        color: white;
+        border-radius: 50%;
+        margin: 0 auto 20px;
+        transition: all 0.3s ease;
+      }
+
+      .case-item:hover .case-icon {
+        background: #e74c3c;
+        transform: scale(1.1);
+      }
+
+      /* General Icon Styling */
+      .fa-4x {
+        font-size: 4em;
+      }
+
+      /* Text Alignment */
+      .product-content,
+      .case-overlay {
+        text-align: center;
+      }
+
+      .product-content h3,
+      .case-overlay h3 {
+        margin-bottom: 15px;
+      }
+
+      /* Card Padding Adjustments */
+      .product-card {
+        padding: 20px;
+        transition: all 0.3s ease;
+      }
+
+      .product-card:hover {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- نوار ناوبری -->
+    <nav class="navbar">
+      <div class="container navbar-container">
+        <a href="#" class="logo">میدون مپ</a>
+        <div class="nav-links">
+          <a href="#products">سرویس ها</a>
+          <a href="#features">قابلیت‌ها</a>
+          <a href="#use-cases">موارد کاربرد</a>
+          <a href="#pricing">قیمت‌گذاری</a>
+          <a href="#contact">تماس با ما</a>
+        </div>
+        <button class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- بخش قهرمان (Hero) -->
+    <section id="hero">
+      <div class="hero-content">
+        <h1>راهکارهای حرفه‌ای نقشه برای برنامه‌های شما</h1>
+        <p>
+          یک پلتفرم قدرتمند با ابزارهای دقیق موقعیت‌یابی، مسیریابی و نمایش نقشه
+          برای کسب و کارهای مختلف
+        </p>
+        <div class="hero-cta">
+          <a href="#products" class="btn btn-contrast"
+            >استفاده رایگان از سرورهای میدون</a
+          >
+          <a href="server-setup.html" class="btn btn-outline-light"
+            >آموزش پیاده سازی در سرور شخصی</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- بخش سرویس ها -->
+    <section id="products" class="fade-in">
+      <div class="container">
+        <div class="section-header">
+          <h2>سرویس های ما</h2>
+          <p>
+            راه‌حل‌های نقشه مبتنی بر ابر با کارایی بالا برای هر نوع کسب و کار و
+            نیاز
+          </p>
+        </div>
+        <div class="products-grid">
+          <div class="product-card">
+            <div class="product-icon">
+              <i class="fas fa-map fa-4x"></i>
+            </div>
+            <div class="product-content">
+              <h3>سرویس نقشه</h3>
+              <p>
+                تایل‌های نقشه با کیفیت بالا با امکان سفارشی‌سازی کامل استایل و
+                لایه‌ها
+              </p>
+              <a href="#" class="btn">اطلاعات بیشتر</a>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-icon">
+              <i class="fas fa-route fa-4x"></i>
+            </div>
+            <div class="product-content">
+              <h3>موتور مسیریابی</h3>
+              <p>
+                الگوریتم‌های پیشرفته مسیریابی با در نظر گرفتن ترافیک زنده و
+                شرایط جاده‌ای
+              </p>
+              <a href="#" class="btn">اطلاعات بیشتر</a>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="product-icon">
+              <i class="fas fa-globe fa-4x"></i>
+            </div>
+            <div class="product-content">
+              <h3>ژئوکدینگ</h3>
+              <p>
+                تبدیل آدرس‌ها به مختصات جغرافیایی و بالعکس با دقت بالا در سراسر
+                ایران
+              </p>
+              <a href="#" class="btn">اطلاعات بیشتر</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- بخش قابلیت‌ها -->
+    <section id="features" class="fade-in">
+      <div class="container">
+        <div class="section-header">
+          <h2>قابلیت‌های کلیدی</h2>
+          <p>
+            ویژگی‌های منحصر به فرد که میدون مپ را از سایر سرویس‌های نقشه متمایز
+            می‌کند
+          </p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <h3>عملکرد بالا</h3>
+            <p>
+              زیرساخت قدرتمند با زمان پاسخگویی سریع و قابلیت مقیاس‌پذیری برای
+              میلیون‌ها درخواست
+            </p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-palette"></i>
+            </div>
+            <h3>سفارشی‌سازی کامل</h3>
+            <p>
+              امکان سفارشی کردن کامل استایل نقشه، رنگ‌ها و نمادها برای مطابقت با
+              برند شما
+            </p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h3>بهینه برای موبایل</h3>
+            <p>
+              تجربه کاربری بی‌نقص در تمام دستگاه‌ها، از تلفن‌های همراه گرفته تا
+              دسکتاپ
+            </p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>امنیت پیشرفته</h3>
+            <p>
+              حفاظت از داده‌های کاربران با رمزگذاری قوی و تطابق با استانداردهای
+              امنیتی
+            </p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h3>تجزیه و تحلیل پیشرفته</h3>
+            <p>
+              ابزارهای تحلیلی قدرتمند برای بررسی الگوهای جغرافیایی و ترافیکی
+            </p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-code"></i>
+            </div>
+            <h3>API کامل</h3>
+            <p>
+              مجموعه کاملی از APIs با مستندات دقیق برای ادغام آسان در برنامه‌های
+              شما
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- بخش موارد کاربرد -->
+    <section id="use-cases" class="fade-in">
+      <div class="container">
+        <div class="section-header">
+          <h2>موارد کاربرد</h2>
+          <p>چگونه کسب و کارهای مختلف از سرویس میدون مپ استفاده می‌کنند</p>
+        </div>
+        <div class="cases-grid">
+          <div class="case-item">
+            <div class="case-icon">
+              <i class="fas fa-truck fa-4x"></i>
+            </div>
+            <div class="case-overlay">
+              <h3>حمل و نقل</h3>
+              <p>
+                بهینه‌سازی مسیرها، ردیابی ناوگان و مدیریت کارآمد ارسال کالا...
+              </p>
+              <a href="#" class="case-link"
+                >مطالعه موردی <i class="fas fa-arrow-left"></i
+              ></a>
+            </div>
+          </div>
+          <div class="case-item">
+            <div class="case-icon">
+              <i class="fas fa-building fa-4x"></i>
+            </div>
+            <div class="case-overlay">
+              <h3>املاک و مستغلات</h3>
+              <p>
+                نمایش ملک‌ها روی نقشه همراه با اطلاعات منطقه و امکانات محلی...
+              </p>
+              <a href="#" class="case-link"
+                >مطالعه موردی <i class="fas fa-arrow-left"></i
+              ></a>
+            </div>
+          </div>
+          <div class="case-item">
+            <div class="case-icon">
+              <i class="fas fa-umbrella-beach fa-4x"></i>
+            </div>
+            <div class="case-overlay">
+              <h3>گردشگری و هتلداری</h3>
+              <p>نقشه‌های تعاملی با نمایش جاذبه‌های گردشگری، هتل‌ها...</p>
+              <a href="#" class="case-link"
+                >مطالعه موردی <i class="fas fa-arrow-left"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- بخش نمایش نقشه -->
+    <section id="demo-map" class="fade-in">
+      <div class="map-container"></div>
+      <div class="map-overlay">
+        <div class="map-content">
+          <h2>نمایش زنده نقشه ما</h2>
+          <p>
+            سرویس نقشه ما را در عمل ببینید و قابلیت‌های منحصر به فرد آن را تجربه
+            کنید.
+          </p>
+          <a href="#" class="btn">آزمایش رایگان</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- بخش قیمت‌گذاری -->
+    <section id="pricing" class="fade-in">
+      <div class="container">
+        <div class="section-header">
+          <h2>طرح‌های قیمت‌گذاری</h2>
+          <p>
+            طرح‌های قیمت‌گذاری منعطف برای کسب و کارها از استارتاپ‌ها تا شرکت‌های
+            بزرگ
+          </p>
+        </div>
+        <div class="pricing-grid">
+          <div class="pricing-card">
+            <div class="pricing-header">
+              <h3>رایگان</h3>
+              <p>مناسب برای استارتاپ‌ها و کسب و کارهای کوچک تا متوسط</p>
+            </div>
+            <div class="price">۰,۰۰۰ <span>تومان / ماه</span></div>
+            <ul class="pricing-features">
+              <li>درخواست ماهانه نامحدود</li>
+              <li>سرویس نقشه پایه</li>
+              <li>ژئوکدینگ استاندارد</li>
+              <li>پشتیبانی ایمیل</li>
+              <li>بدون نیاز به نمایش لوگو روی نقشه</li>
+            </ul>
+            <a href="#" class="btn">انتخاب طرح</a>
+          </div>
+          <!-- <div class="pricing-card featured">
+            <div class="pricing-header">
+              <h3>حرفه‌ای</h3>
+              <p>مناسب برای کسب و کارهای متوسط</p>
+            </div>
+            <div class="price">۶۹۹,۰۰۰ <span>تومان / ماه</span></div>
+            <ul class="pricing-features">
+              <li>۵۰۰,۰۰۰ درخواست ماهانه</li>
+              <li>سرویس نقشه پیشرفته</li>
+              <li>مسیریابی چند نقطه‌ای</li>
+              <li>ژئوکدینگ دقیق</li>
+              <li>پشتیبانی تلفنی</li>
+              <li>تجزیه و تحلیل پایه</li>
+            </ul>
+            <a href="#" class="btn">انتخاب طرح</a>
+          </div> -->
+          <div class="pricing-card">
+            <div class="pricing-header">
+              <h3>سازمانی</h3>
+              <p>مناسب برای سازمان‌ها و نیازهای پیشرفته</p>
+            </div>
+            <div class="price">تماس بگیرید</div>
+            <ul class="pricing-features">
+              <li>درخواست‌های نامحدود</li>
+              <li>سفارشی‌سازی کامل نقشه</li>
+              <li>تحلیل‌های پیشرفته ترافیک</li>
+              <li>مسیریابی بهینه برای ناوگان</li>
+              <li>پشتیبانی اختصاصی ۲۴/۷</li>
+              <li>SLA اختصاصی</li>
+              <li>قابلیت‌های سفارشی</li>
+            </ul>
+            <a href="#" class="btn">تماس با ما</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- بخش تماس با ما -->
+    <section id="contact" class="fade-in">
+      <div class="container">
+        <div class="contact-container">
+          <div class="contact-info">
+            <h2>با ما در ارتباط باشید</h2>
+            <p>
+              برای دریافت اطلاعات بیشتر یا سوالات خود با ما تماس بگیرید. تیم ما
+              آماده کمک به شماست.
+            </p>
+            <div class="contact-methods">
+              <div class="contact-method">
+                <div class="contact-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <p>info@meydoon.org</p>
+              </div>
+              <!-- <div class="contact-method">
+                <div class="contact-icon">
+                  <i class="fas fa-phone"></i>
+                </div>
+                <p>۰۲۱-۸۸۷۷۶۶۵۵</p>
+              </div>
+              <div class="contact-method">
+                <div class="contact-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <p>تهران، خیابان ولیعصر، میدان ونک</p>
+              </div> -->
+            </div>
+          </div>
+          <div class="contact-form">
+            <form>
+              <div class="form-group">
+                <label for="name">نام و نام خانوادگی</label>
+                <input type="text" id="name" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label for="email">ایمیل</label>
+                <input type="email" id="email" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label for="subject">موضوع</label>
+                <input type="text" id="subject" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label for="message">پیام</label>
+                <textarea id="message" class="form-control" required></textarea>
+              </div>
+              <button type="submit" class="btn">ارسال پیام</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- بخش فوتر -->
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h3>میدون مپ</h3>
+            <ul class="footer-links">
+              <li><a href="#about">درباره ما</a></li>
+              <li><a href="#products">سرویس ها</a></li>
+              <li><a href="#pricing">قیمت‌گذاری</a></li>
+              <li><a href="#contact">تماس با ما</a></li>
+              <li><a href="#">وبلاگ</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3>سرویس ها</h3>
+            <ul class="footer-links">
+              <li><a href="#">سرویس نقشه</a></li>
+              <li><a href="#">موتور مسیریابی</a></li>
+              <li><a href="#">ژئوکدینگ</a></li>
+              <li><a href="#">تحلیل داده‌های مکانی</a></li>
+              <li><a href="#">نقشه‌های آفلاین</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3>منابع</h3>
+            <ul class="footer-links">
+              <li><a href="#">مستندات API</a></li>
+              <li><a href="#">راهنما و آموزش</a></li>
+              <li><a href="#">نمونه‌های کد</a></li>
+              <li><a href="#">پایگاه دانش</a></li>
+              <li><a href="#">انجمن پرسش و پاسخ</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3>ما را دنبال کنید</h3>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-github"></i></a>
+              <a href="#"><i class="fab fa-telegram"></i></a>
+            </div>
+            <p style="margin-top: 20px">
+              در خبرنامه ما عضو شوید تا از آخرین اخبار، ویژگی‌ها و تخفیف‌ها مطلع
+              شوید.
+            </p>
+            <form style="display: flex; margin-top: 10px">
+              <input
+                type="email"
+                placeholder="ایمیل شما"
+                class="form-control"
+                style="border-radius: 4px 0 0 4px; margin-bottom: 0"
+              />
+              <button
+                type="submit"
+                class="btn"
+                style="border-radius: 0 4px 4px 0; margin-right: -1px"
+              >
+                عضویت
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© ۱۴۰۴ میدون مپ. تمامی حقوق محفوظ است.</p>
+          <p>طراحی و توسعه توسط <a href="#">تیم میدون</a></p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+      // Navigation bar scroll effect
+      window.addEventListener("scroll", function () {
+        const navbar = document.querySelector(".navbar");
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+
+      // Mobile menu toggle
+      const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
+      const navLinks = document.querySelector(".nav-links");
+
+      mobileMenuBtn.addEventListener("click", function () {
+        navLinks.classList.toggle("active");
+      });
+
+      // Scroll animations
+      document.addEventListener("DOMContentLoaded", function () {
+        const fadeElements = document.querySelectorAll(".fade-in");
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("active");
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+
+        fadeElements.forEach((element) => {
+          observer.observe(element);
+        });
+
+        // Smooth scrolling for anchors
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            const href = this.getAttribute("href");
+            if (href === "#") return;
+
+            const targetElement = document.querySelector(href);
+
+            if (targetElement) {
+              window.scrollTo({
+                top: targetElement.offsetTop - 70,
+                behavior: "smooth",
+              });
+
+              // Close mobile menu if open
+              navLinks.classList.remove("active");
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

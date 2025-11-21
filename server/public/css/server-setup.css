@@ -1,0 +1,195 @@
+:root {
+  --primary: #2a4d8c;
+  --secondary: #3a6ea5;
+  --accent: #ff8500;
+  --background: #1a1a1a;
+  --text: #e0e0e0;
+  --code-bg: #2d2d2d;
+  --success: #4caf50;
+}
+
+@font-face {
+  font-family: "Shabnam";
+  src: url("/fonts/Shabnam-FD.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+  font-family: "Shabnam";
+  line-height: 1.8;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 2rem 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-top: 3.5rem;
+  }
+}
+
+.navbar {
+  background: rgba(26, 26, 26, 0.95);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 0;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.logo {
+  color: var(--accent);
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 0 1rem;
+  }
+
+  .nav-links {
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+    display: none;
+  }
+
+  .logo {
+    font-size: 1.2rem;
+  }
+}
+
+.service-card {
+  background: rgba(40, 40, 40, 0.8);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease;
+  overflow: hidden;
+}
+
+.service-card.warning {
+  border: 2px solid #ff6b6b;
+  background: rgba(255, 107, 107, 0.1);
+}
+
+.service-card.warning h2 {
+  color: #ff6b6b;
+}
+
+@media (max-width: 768px) {
+  .service-card {
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+}
+
+code {
+  background: var(--code-bg);
+  padding: 1.2rem;
+  border-radius: 8px;
+  direction: ltr;
+  display: block;
+  white-space: pre;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  font-family: "Fira Code", monospace;
+  font-size: 0.9rem;
+  color: #e6db74;
+  position: relative;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 768px) {
+  code {
+    font-size: 0.8rem;
+    padding: 1rem;
+  }
+}
+
+code::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--primary));
+}
+
+h1,
+h2,
+h3 {
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-top: 4rem;
+}
+
+a {
+  color: var(--secondary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+ol,
+ul {
+  padding-right: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.8rem;
+}
+
+footer {
+  background: rgba(26, 26, 26, 0.95);
+  padding: 2rem 0;
+  margin-top: 4rem;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
