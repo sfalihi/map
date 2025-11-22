@@ -55,7 +55,7 @@ services:
   tileserver:
     image: maptiler/tileserver-gl
     volumes:
-      - ./data/mbtiles:/data
+      - ./data/tiles:/data
     deploy:
       replicas: 1
       labels:
