@@ -80,7 +80,7 @@ services:
         - "traefik.http.routers.tiles-https-meydoon.tls=true"
         - "traefik.http.routers.tiles-https-meydoon.tls.certresolver=letsencrypt"
     ports:
-      - "8080:8080"
+      - "5004:8080"
 
   osrm-backend:
     image: osrm/osrm-backend
@@ -128,7 +128,7 @@ services:
         - "traefik.http.routers.osrm-https-meydoon.tls=true"
         - "traefik.http.routers.osrm-https-meydoon.tls.certresolver=letsencrypt"
     ports:
-      - "5000:5000"
+      - "5001:5000"
 
   nominatim:
     image: mediagis/nominatim:4.2
