@@ -27,10 +27,7 @@ services:
         published: 443
         protocol: tcp
         mode: host
-      - target: 8080 # <-- Expose port 8080 for dashboard
-        published: 8080
-        protocol: tcp
-        mode: host
+
     deploy:
       mode: global
       labels:
@@ -79,8 +76,6 @@ services:
         - "traefik.http.routers.tiles-https-meydoon.rule=Host(`tiles.meydoon.org`)"
         - "traefik.http.routers.tiles-https-meydoon.tls=true"
         - "traefik.http.routers.tiles-https-meydoon.tls.certresolver=letsencrypt"
-    ports:
-      - "5004:8080"
 
   osrm-backend:
     image: osrm/osrm-backend
@@ -127,8 +122,6 @@ services:
         - "traefik.http.routers.osrm-https-meydoon.rule=Host(`osrm.meydoon.org`)"
         - "traefik.http.routers.osrm-https-meydoon.tls=true"
         - "traefik.http.routers.osrm-https-meydoon.tls.certresolver=letsencrypt"
-    ports:
-      - "5001:5000"
 
   nominatim:
     image: mediagis/nominatim:4.2
